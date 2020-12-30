@@ -1,5 +1,5 @@
 const express = require('express');
-const castingController = require('./../controllers/CastingController');
+const castingController = require('./../controllers/castingController');
 const authController = require('./../controllers/authController');
 
 const router = express.Router();
