@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Router, ActivatedRoute } from '@angular/router';
-import { InscriptionService } from 'src/app/services/inscription.service';
+import { AdditionalInscriptionServiceService } from 'src/app/services/additional-inscription-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { InscriptionQuoteService } from 'src/app/services/inscription-quote.service';
 
@@ -47,7 +47,7 @@ export class InscriptionQuoteSteperComponent implements OnInit {
 
 
   constructor(private _formBuilder: FormBuilder,
-    private inscriptionService: InscriptionService,
+    private inscriptionService: AdditionalInscriptionServiceService,
     private authService: AuthService,
     private inscriptionQuoteService: InscriptionQuoteService,
     private router: Router) { }

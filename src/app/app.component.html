@@ -11,7 +11,11 @@
         <button mat-menu-item [routerLink]="'/inscriptioncalculator'">Inscription On Site</button>
         <button mat-menu-item [routerLink]="'/calculator2'">Renovation</button>
       </mat-menu>
-      <button mat-button [routerLink]="'/quoteslist'"> Previous Quote </button>
+    <button mat-button [matMenuTriggerFor]="men">Previous Quote</button>
+      <mat-menu #men="matMenu">
+      <button mat-button [routerLink]="'/quoteslist'"> Monument Quote </button> 
+      <button mat-button [routerLink]="'/inscriptionQuoteslist'"> Inscription Quote </button> 
+      </mat-menu> 
       <!-- <button mat-button [routerLink]="'/dailyreport'"> Upload Daily Report </button>
       <button mat-button [routerLink]="'/somethingelse'"> Upload Daily something </button> -->
      <!-- <button mat-button [routerLink]="'/create-activity'"> Create Activity </button> -->
@@ -38,6 +42,7 @@
       <a mat-list-item *ngIf="authService.currentUser"[routerLink]="'/inscriptionslist'"> Inscription </a>
       <a mat-list-item *ngIf="authService.currentUser"[routerLink]="'/accessorieslist'"> Accessories </a>
       <a mat-list-item *ngIf="authService.currentUser"[routerLink]="'/foundationslist'"> Foundation </a>
+      <a mat-list-item *ngIf="authService.currentUser"[routerLink]="'/additionalInscriptionslist'"> Installation on Site </a>
       <a mat-list-item *ngIf="authService.currentUser"[routerLink]="'/ipslist'"> IP Management </a>
     </mat-nav-list>
   </mat-sidenav>

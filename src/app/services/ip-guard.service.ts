@@ -13,10 +13,9 @@ export class IpGuard implements CanActivate {
   canActivate(){
     return this.ipService.getIPAddress().pipe(map(res=>{ 
       let ipaddress =res['ip'];
-      console.log({ip:ipaddress});
       if(ipaddress){
         this.ipService.isIpPermission({ip:ipaddress}).subscribe(res=>{
-          console.log(res['status'])
+          //console.log(res['status'])
           if(res['status'])
             return res['status'];
           else{

@@ -65,43 +65,63 @@ exports.getAllInscriptionQuote = catchAsync(async (req, res, next) => {
 });
 
 exports.createInscriptionQuote = catchAsync(async (req, res, next) => {
-    const newInscriptionQuote = await InscriptionQuote.create(req.body);
-    res.status(201).json({
-        status: 'success',
-        data: {
-            quoteId: newInscriptionQuote._id
-    }
+  const newQuote = await InscriptionQuote.create(req.body);
+  let totalPrice =  0;
+  
+  const result = await InscriptionQuote.findById(newQuote._id)
+    .populate('inscription.inscriptionId')
+    .populate('staff');
+  if (result.inscription) {
+    result.inscription.forEach(inscrp => {
+      if(inscrp.inscriptionId._id == "5ff507ef56ba30a52bd76c8b"){
+        if(inscrp.inscriptionNumber > 300){
+          totalPrice = totalPrice + 495 + inscrp.inscriptionId.price * (inscrp.inscriptionNumber - 300)
+        }
+        else
+          totalPrice = totalPrice + 495
+      }else{
+      totalPrice = totalPrice + inscrp.inscriptionId.price * inscrp.inscriptionNumber;}
+      console.log(totalPrice)
     })
+  }
+  if (result.extraFee) {
+    totalPrice = totalPrice + result.extraFee;
+    console.log(totalPrice)
+  }
+  if (result.permitFee) {
+    totalPrice = totalPrice + result.permitFee;
+    console.log('lkalala',totalPrice)
+  }
+    
+  console.log("beforeUpdate", totalPrice);
+
+  await InscriptionQuote.findByIdAndUpdate(newQuote._id, {
+    'totalPrice': totalPrice
+  });
+  
+  res.status(201).json({
+    status: 'success',
+    data: {
+      quoteId: newQuote._id
+    }
+  })
+  
+  
 });
 
+
 exports.getInscriptionQuote = catchAsync(async (req, res, next) => {
-    let totalPrice = 0;
-    InscriptionQuote.findById(req.params.id).populate('inscription.inscriptionId')
-                                .populate('staff').exec((err,result)=>{
-                                  console.log(result)
-                                    if(result.inscription){
-                                        result.inscription.forEach(inscrp=>{
-                                            totalPrice = totalPrice + inscrp.inscriptionId.price * inscrp.inscriptionNumber;
-                                            console.log(inscrp.inscriptionId.price)
-                                            console.log(totalPrice)
-                                        })
-                                    }
-                                    if(result.extraFee){
-                                      totalPrice = totalPrice + result.extraFee;
-                                        console.log(totalPrice)
-                                    }
-                                    if(result.permitFee){
-                                      totalPrice = totalPrice + result.permitFee;
-                                        console.log(totalPrice)
-                                    }
-                                    res.status(200).json({
-                                        status: 'success',
-                                        data: {
-                                          totalPrice: totalPrice.toFixed(2),
-                                          quote: result
-                                        }
-                                });
-    });
+  const result = await InscriptionQuote.findById(req.params.id)
+  .populate('inscription.inscriptionId')
+  .populate('staff');
+
+res.status(200).json({
+  status: 'success',
+  data: {
+    totalPrice: result.totalPrice.toFixed(2),
+    quote: result
+  }
+});
 });
 
 exports.updateInscriptionQuote = catchAsync(async (req, res, next) => {

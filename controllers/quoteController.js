@@ -125,7 +125,11 @@ exports.createQuote = catchAsync(async (req, res, next) => {
   if (result.inscription) {
     result.inscription.forEach(inscrp => {
       if(inscrp.inscriptionId._id == "5fdc292a3f005c069b66f865"){
-        totalPrice = totalPrice + 495 + inscrp.inscriptionId.price * (inscrp.inscriptionNumber - 200)
+        if(inscrp.inscriptionNumber > 200){
+          totalPrice = totalPrice + 495 + inscrp.inscriptionId.price * (inscrp.inscriptionNumber - 200)
+        }
+        else
+          totalPrice = totalPrice + 495
       }else{
       totalPrice = totalPrice + inscrp.inscriptionId.price * inscrp.inscriptionNumber;}
       console.log(totalPrice)

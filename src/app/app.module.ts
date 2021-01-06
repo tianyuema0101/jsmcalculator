@@ -70,6 +70,8 @@ import { CastingProfileComponent } from './casting-sector/casting-profile/castin
 import { InscriptionQuoteComponent, DialogOverviewExampleDialog1 } from './inscriptionQuoteSector/inscription-quote/inscription-quote.component';
 import { InscriptionQuoteSteperComponent } from './inscriptionQuoteSector/inscription-quote-steper/inscription-quote-steper.component';
 import { InscriptionQuoteDetailComponent } from './inscriptionQuoteSector/inscription-quote-detail/inscription-quote-detail.component';
+import { AdditionalInscriptionComponent } from './additionalInscription-sector/additional-inscription/additional-inscription.component';
+import { AdditionalInscriptionProfileComponent } from './additionalInscription-sector/additional-inscription-profile/additional-inscription-profile.component';
 
 
 const adminRoutes: Routes = [
@@ -93,6 +95,11 @@ const adminRoutes: Routes = [
   { path: 'inscriptionslist',   component: InscriptionComponent, canActivate:[IpGuard,AuthGuard] },
   { path: 'inscription-profile',   component: InscriptionProfileComponent, canActivate:[IpGuard,AuthGuard] },
   { path: 'inscription-profile/:id',   component: InscriptionProfileComponent, canActivate:[IpGuard,AuthGuard] },
+  //inscription on site
+  { path: 'additionalInscriptionslist',   component: AdditionalInscriptionComponent, canActivate:[IpGuard,AuthGuard] },
+  { path: 'additionalInscription-profile',   component: AdditionalInscriptionProfileComponent, canActivate:[IpGuard,AuthGuard] },
+  { path: 'additionalInscription-profile/:id',   component: AdditionalInscriptionProfileComponent, canActivate:[IpGuard,AuthGuard] },
+
   //foundation management
   { path: 'foundationslist',   component: FoundationComponent, canActivate:[IpGuard,AuthGuard] },
   { path: 'foundation-profile',   component: FoundationProfileComponent, canActivate:[IpGuard,AuthGuard] },
@@ -151,7 +158,9 @@ const adminRoutes: Routes = [
     CastingProfileComponent,
     InscriptionQuoteComponent,
     InscriptionQuoteSteperComponent,
-    InscriptionQuoteDetailComponent
+    InscriptionQuoteDetailComponent,
+    AdditionalInscriptionComponent,
+    AdditionalInscriptionProfileComponent
   ],
   imports: [
     BrowserModule,

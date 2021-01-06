@@ -26,7 +26,7 @@ additionalInscriptionSchema.pre('save', function(next) {
   });
 
 
-const AdditionalInscriptionSchema = mongoose.model('AdditionalInscriptionSchema', additionalInscriptionSchema);
+const AdditionalInscription = mongoose.model('AdditionalInscription', additionalInscriptionSchema);
 
-module.exports = AdditionalInscriptionSchema;
+module.exports = AdditionalInscription;
 

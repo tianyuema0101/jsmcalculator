@@ -37,7 +37,7 @@ const inscriptionQuoteSchema = new mongoose.Schema({
     },
     inscription:[{
         inscriptionId:{type: Schema.Types.ObjectId, 
-            ref: 'Inscription'},
+            ref: 'AdditionalInscription'},
         inscriptionNumber: Number
     }],
     modifiedDate:{
@@ -74,6 +74,9 @@ const inscriptionQuoteSchema = new mongoose.Schema({
     funeralProvider:{
         type: String,
         trim:true 
+    },
+    totalPrice:{
+        type: Number
     }
 });
 

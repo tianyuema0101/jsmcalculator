@@ -18,12 +18,18 @@ import { QuoteService } from 'src/app/services/quote.service';
   styleUrls: ['./quote-stepper.component.css']
 })
 export class QuoteStepperComponent implements OnInit {
-  monumentStyles = ['Lawn', 'Single', 'Double', 'Family'];
+  monumentStyles = ['Lawn Wing Or OG', 'Single Wing Or OG', 'Double Wing Or OG', 'Other', 'Song He Yuan', 'Single Chapel',
+                    'Double Chapel', 'Single Cabinet', 'Double Cabinet', 'Single Asian Chapel', 'Double Asian Chapel',
+                    'Single Muslim',  'Double Muslim', 'Lawn Asian Chapel', 'Lawn Chapel', 'Carving', 'Book', 'Single Cabinet Chapel', 'Desktop',
+                    'Claim for Ledger', 'Renovation', 'Stock Ledger', 'Pet Monument', 'Triple Asian Chapel'];
   colorList = [{ name: 'Black', displayName: 'Black' },
   { name: 'Grey', displayName: 'Grey' },
   { name: 'White', displayName: 'White' },
   { name: 'Red', displayName: 'Red' },
   { name: 'Other', displayName: 'Other Color' },];
+  sizeLists = ['0.15-0.35 Cubic', '0.35-0.91 Cubic', '0.91-1.7 Cubic'];
+  totalUsage = '';
+
   inscriptionTypeList: string[] = ['English', 'Chinese', 'Arabic', 'Decoration'];
   doorList;
   currentQuote = {
@@ -131,6 +137,7 @@ export class QuoteStepperComponent implements OnInit {
     });
 
     this.materialFormGroup = this._formBuilder.group({
+      totalUsage: ['',],
       color0: ['',],
       monument0: ['',],
       size0: ['',],
@@ -288,25 +295,24 @@ export class QuoteStepperComponent implements OnInit {
   }
 
   filterCastingSize(name,index){
-    console.log(this.castingNameCollection.find(e => e.name == name))
+    //console.log(this.castingNameCollection.find(e => e.name == name))
     this.castingSizeCollection[index] = [];
     this.castingSizeCollection[index] = this.castingNameCollection.find(e => e.name == name).sizes;
   }
 
   //material part
+
+  filterTotalUsage(totalUsage){
+    let params = '?size=' + totalUsage; 
+    this.monumentService.getMonumentByOther(params).subscribe(result => {
+      console.log(result)
+    })
+  }
   getMonumentName(color, index) {
-    let params = '?color=' + color;
+    let params = '?color=' + color + '&size=' + this.totalUsage;
     this.monumentService.getMonumentByOther(params).subscribe(result => {
       result['data']['monuments'].forEach(element => {
-        if (!this.monumentNameCollection[index].some(e => e.name == element.englishName)) {
-          this.monumentNameCollection[index].push({ name: element.englishName, displayName: element.englishName + "/" + element.chineseName, sizes: [{ size: element.size, _id: element._id }] });
-        }
-        else {
-          let monumentIndex = this.monumentNameCollection[index].findIndex(e => e.name == element.englishName);
-          if (monumentIndex != -1) {
-            this.monumentNameCollection[index][monumentIndex].sizes.push({ size: element.size, _id: element._id });
-          }
-        }
+          this.monumentNameCollection[index].push({ name: element.englishName, displayName: element.englishName + "/" + element.chineseName, _id: element._id });
       })
     })
   }
@@ -331,10 +337,10 @@ export class QuoteStepperComponent implements OnInit {
     this.getMonumentName(color, index);
   }
 
-  filterMonumentSize(name, index) {
-    this.monumentSizeCollection[index] = [];
-    this.monumentSizeCollection[index] = this.monumentNameCollection[index].find(e => e.name == name).sizes;
-  }
+  // filterMonumentSize(name, index) {
+  //   this.monumentSizeCollection[index] = [];
+  //   this.monumentSizeCollection[index] = this.monumentNameCollection[index].find(e => e.name == name).sizes;
+  // }
 
   //inscription part
   filterInscription(type, index) {
@@ -474,19 +480,19 @@ export class QuoteStepperComponent implements OnInit {
       })
     }
 
-    if (this.monumentCollection[0]['number'] != undefined && this.monumentCollection[0]['size'] != undefined) {
+    if (this.monumentCollection[0]['number'] != undefined && this.monumentCollection[0]['name'] != undefined) {
       this.monumentCollection.forEach(element => {
-        if (element['size'] != undefined && element['number'] != undefined) {
+        if (element['name'] != undefined && element['number'] != undefined) {
           quoteData.monument.push({
-            monumentId: element['size'],
+            monumentId: element['name'],
             monumentNumber: element['number']
           })
         }
       })
     }
-    console.log(this.castingCollection[0]['castingNumber'] != undefined)
+    //console.log(this.castingCollection[0]['castingNumber'] != undefined)
     if (this.castingCollection[0]['castingNumber'] != undefined && this.castingCollection[0]['castingId'] != undefined) {
-      console.log(this.castingCollection[0]['castingNumber'], this.castingCollection[0]['castingId'])
+      //console.log(this.castingCollection[0]['castingNumber'], this.castingCollection[0]['castingId'])
       this.castingCollection.forEach(element => {
         if (element['castingId'] != undefined && element['castingNumber'] != undefined) {
           quoteData.casting.push({
@@ -509,7 +515,7 @@ export class QuoteStepperComponent implements OnInit {
     }
     quoteData.staff = this.authService.currentUserId();
     this.clean(quoteData);
-    console.log(quoteData)
+    //console.log(quoteData)
     this.quoteService.checkPhone(quoteData.phone).subscribe(res=>{
       if(res['status']== 'old'){
         if(confirm('This Customer got a quote from ' + res['data']['name'])){

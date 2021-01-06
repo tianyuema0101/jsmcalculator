@@ -45,26 +45,7 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step [stepControl]="styleFormGroup">
-            <form [formGroup]="styleFormGroup">
-                <ng-template matStepLabel>Monument Style</ng-template>
-                <div class="middle-steper">
-                    <mat-form-field class="middle-steper">
-                        <mat-label>Select Monument Style</mat-label>
-                        <mat-select formControlName="monumentStyle">
-                            <mat-option></mat-option>
-                            <mat-option *ngFor="let option of monumentStyles" [value]="option">
-                                {{ option }}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <button style="float: right;" mat-button matStepperNext>Next</button>
-                    <button style="float: right;" mat-button matStepperPrevious>Back</button>
-                </div>
-            </form>
-        </mat-step>
+       
         <mat-step [stepControl]="permitFormGroup">
             <form [formGroup]="permitFormGroup">
                 <ng-template matStepLabel>Permit</ng-template>

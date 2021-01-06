@@ -83,6 +83,15 @@
     <mat-step [stepControl]="materialFormGroup">
         <form [formGroup]="materialFormGroup">
             <ng-template matStepLabel>Material</ng-template>
+            <mat-form-field class="example-full-width col-md-3">
+                <mat-label>Total Usage of the Materials</mat-label>
+                <mat-select formControlName="totalUsage" [(ngModel)]="totalUsage">
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let size of sizeLists" [value]="size">
+                        {{ size }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <div class="col-md-12" *ngFor="let monument of monumentCollection; let i = index;">
                 <mat-form-field class="example-full-width col-md-2">
                     <mat-label>-- Select Color --</mat-label>
@@ -95,26 +104,17 @@
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="example-full-width col-md-4">
-                    <mat-label>-- Select Monument --</mat-label>
-                    <mat-select [(ngModel)]="monument.name" formControlName="monument{{i}}"
-                        (selectionChange)="filterMonumentSize($event.value, i)">
+                    <mat-label>-- Select Material --</mat-label>
+                    <mat-select [(ngModel)]="monument.name" formControlName="monument{{i}}">
                         <mat-option>--</mat-option>
-                        <mat-option *ngFor="let monumentName of monumentNameCollection[i]" [value]="monumentName.name">
+                        <mat-option *ngFor="let monumentName of monumentNameCollection[i]" [value]="monumentName._id">
                             {{ monumentName.displayName }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="example-full-width col-md-3">
-                    <mat-label>-- Select Size --</mat-label>
-                    <mat-select [(ngModel)]="monument.size" formControlName="size{{i}}">
-                        <mat-option>--</mat-option>
-                        <mat-option *ngFor="let size of monumentSizeCollection[i]" [value]="size._id">
-                            {{ size.size }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                
                 <mat-form-field class="example-full-width col-md-1">
-                    <input [(ngModel)]="monument.number" formControlName="number{{i}}" matInput placeholder="Real Size"
+                    <input [(ngModel)]="monument.number" formControlName="number{{i}}" matInput placeholder="Material Usage"
                         type="number" min="0">
                 </mat-form-field>
                 <button mat-button *ngIf="monumentCollection.length!= 1" type="button" (click)="removeMonument(i)">
