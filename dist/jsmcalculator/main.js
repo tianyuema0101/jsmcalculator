@@ -2109,7 +2109,7 @@ function QuoteComponent_tr_44_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("No data matching the filter \"", _r0.value, "\"");
 } }
-const _c1 = function () { return ["/calculator/"]; };
+const _c1 = function () { return ["/calculator2/"]; };
 const _c2 = function () { return [10, 20, 30]; };
 const _c3 = "table[_ngcontent-%COMP%] {\n    width: 100%;\n  }\n  \n.mat-form-field[_ngcontent-%COMP%] {\n    font-size: 14px;\n    width: 100%;\n}\n  \ntd[_ngcontent-%COMP%], th[_ngcontent-%COMP%] {\n    width: 5%;\n  }\n  \n#editButton[_ngcontent-%COMP%]{\n    margin-right: 5px\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcXVvdGUtc2VjdG9yL3F1b3RlL3F1b3RlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0VBQ2I7O0FBRUY7SUFDSSxlQUFlO0lBQ2YsV0FBVztBQUNmOztBQUVFO0lBQ0UsU0FBUztFQUNYOztBQUVGO0lBQ0k7QUFDSiIsImZpbGUiOiJzcmMvYXBwL3F1b3RlLXNlY3Rvci9xdW90ZS9xdW90ZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsidGFibGUge1xuICAgIHdpZHRoOiAxMDAlO1xuICB9XG4gIFxuLm1hdC1mb3JtLWZpZWxkIHtcbiAgICBmb250LXNpemU6IDE0cHg7XG4gICAgd2lkdGg6IDEwMCU7XG59XG4gIFxuICB0ZCwgdGgge1xuICAgIHdpZHRoOiA1JTtcbiAgfVxuXG4jZWRpdEJ1dHRvbntcbiAgICBtYXJnaW4tcmlnaHQ6IDVweFxufVxuIl19 */";
 ;
