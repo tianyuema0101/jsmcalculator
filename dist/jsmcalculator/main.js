@@ -4086,7 +4086,7 @@ class InscriptionQuoteSteperComponent {
         console.log(quoteData);
         this.inscriptionQuoteService.checkPhone(quoteData.phone).subscribe(res => {
             if (res['status'] == 'old') {
-                if (confirm('This Customer got a quote from ' + res['data']['name'])) {
+                if (confirm('This Customer got a quote from ' + res['data'])) {
                     this.inscriptionQuoteService.createInscriptionQuote(quoteData).subscribe((result) => {
                         if (result['data']['quoteId']) {
                             let quoteId = result['data']['quoteId'];

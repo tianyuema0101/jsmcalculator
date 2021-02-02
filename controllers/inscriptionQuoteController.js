@@ -148,9 +148,11 @@ exports.checkPhone = catchAsync(async (req, res, next) => {
     })
   }
   else{
+    console.log(inscriptionQuote.staff)
     res.status(200).json({
       status:"old",
       data:inscriptionQuote.staff
+      
   })
   }
 });
