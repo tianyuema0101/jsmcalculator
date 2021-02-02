@@ -59,8 +59,8 @@ export class InscriptionQuoteSteperComponent implements OnInit {
       email: [''],
       cemetery: [''],
       section: [''],
-      funeralProvider: [''],
-      advertisement: [''],
+      funeralProvider: ['',Validators.required],
+      advertisement: ['',Validators.required],
       row:[''],
       grave_no:[''],
     });

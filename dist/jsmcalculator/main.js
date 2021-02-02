@@ -3209,7 +3209,7 @@ class InscriptionQuoteComponent {
             console.log(result);
             let data = result["data"]["inscriptionQuote"];
             data.forEach(element => {
-                element['staff'] = element['staff']['name'];
+                element['staff'] = element['name'];
                 console.log(element);
             });
             this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"](data);
@@ -4015,8 +4015,8 @@ class InscriptionQuoteSteperComponent {
             email: [''],
             cemetery: [''],
             section: [''],
-            funeralProvider: [''],
-            advertisement: [''],
+            funeralProvider: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            advertisement: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             row: [''],
             grave_no: [''],
         });
@@ -5448,8 +5448,8 @@ class QuoteStepperComponent {
             email: [''],
             cemetery: [''],
             section: [''],
-            funeralProvider: [''],
-            advertisement: [''],
+            funeralProvider: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            advertisement: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             row: [''],
             grave_no: [''],
         });

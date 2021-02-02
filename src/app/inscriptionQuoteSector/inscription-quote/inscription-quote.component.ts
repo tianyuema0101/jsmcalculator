@@ -44,7 +44,7 @@ export class InscriptionQuoteComponent implements OnInit {
       console.log(result)
       let data = result["data"]["inscriptionQuote"];
       data.forEach(element => {
-        element['staff'] = element['staff']['name'];
+        element['staff'] = element['name'];
         console.log(element)
       });
       this.dataSource = new MatTableDataSource(data)
